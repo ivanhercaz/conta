@@ -60,7 +60,7 @@
             <.field class="is-horizontal" label={gettext("Balances")}>
               <.simple_table id="balances" rows={@account.balances}>
                 <:col :let={balance} class="has-text-right is-money" label={gettext("Amount")}>
-                  <%= %Money{balance.amount | currency: balance.currency} %>
+                  <%= Money.to_string(%Money{balance.amount | currency: balance.currency}) %>
                 </:col>
               </.simple_table>
             </.field>
