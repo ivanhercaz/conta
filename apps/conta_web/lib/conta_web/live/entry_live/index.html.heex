@@ -99,13 +99,13 @@
               <% end %>
             </:col>
             <:col :let={{_id, entry}} class="has-text-right money" label={gettext("debit")}>
-              <%= entry.debit %>
+              <%= Money.to_string(entry.debit) %>
             </:col>
             <:col :let={{_id, entry}} class="has-text-right money" label={gettext("credit")}>
-              <%= entry.credit %>
+              <%= Money.to_string(entry.credit) %>
             </:col>
             <:col :let={{_id, entry}} class="has-text-right money" label={gettext("balance")}>
-              <%= entry.balance %>
+              <%= Money.to_string(entry.balance) %>
             </:col>
           </.table>
           <div
