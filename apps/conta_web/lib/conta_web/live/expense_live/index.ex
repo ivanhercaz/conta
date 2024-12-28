@@ -26,9 +26,9 @@ defmodule ContaWeb.ExpenseLive.Index do
         do: {filter.description || filter.name, filter.id}
   end
 
-  defp terms_and_years do
-    {max_date, min_date} = Book.get_expense_date_range()
-
+  defp terms_and_years, do: terms_and_years(Book.get_invoice_date_range())
+  defp terms_and_years({nil, nil}), do: []
+  defp terms_and_years({max_date, min_date}) do
     Stream.unfold(min_date, fn date ->
       if Date.compare(date, max_date) != :gt do
         year = date.year
@@ -39,7 +39,6 @@ defmodule ContaWeb.ExpenseLive.Index do
     |> Enum.uniq()
     |> Enum.reverse()
   end
-
   @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
